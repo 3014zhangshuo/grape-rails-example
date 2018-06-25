@@ -89,5 +89,14 @@ module API
         build_response data: 'popular'
       end
     end
+
+    add_swagger_documentation(
+      info: {
+        title: '',
+        contact_email: ''
+      },
+      mount_path: 'doc/swagger',
+      doc_version: ''
+    )
   end
 end
