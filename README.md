@@ -18,6 +18,6 @@
 
 ## Debugging routes
 
-API::Base.routes
-API::Base.recognize_path '/v1/blogs'
-rails grape:routes
+- API::Base.routes
+- API::Base.recognize_path '/v1/blogs'
+- rails grape:routes
