@@ -3,28 +3,28 @@ module API
     class Blogs < Grape::API
       include Default
       # except xml binary
-      content_type :json, 'application/json'
-      # content_type :xml, 'application/xml'
-      content_type :txt, 'text/plain'
-      # content_type :binary, 'application/octet-stream'
-
-      default_format :json
-
-      #version 'v1', using: :path # api/v1/...
-
-      helpers do
-        def build_response(code: 0, data: nil)
-          { code: code, data: data }
-        end
-
-        params :id_valiadtor do |options|
-          requires :id, type: Integer
-        end
-      end
-
-      rescue_from ActiveRecord::RecordNotFound, NoMethodError do |e|
-        error!({code:2, error:'not found'}, 400)
-      end
+      # content_type :json, 'application/json'
+      # # content_type :xml, 'application/xml'
+      # content_type :txt, 'text/plain'
+      # # content_type :binary, 'application/octet-stream'
+      #
+      # default_format :json
+      #
+      # #version 'v1', using: :path # api/v1/...
+      #
+      # helpers do
+      #   def build_response(code: 0, data: nil)
+      #     { code: code, data: data }
+      #   end
+      #
+      #   params :id_valiadtor do |options|
+      #     requires :id, type: Integer
+      #   end
+      # end
+      #
+      # rescue_from ActiveRecord::RecordNotFound, NoMethodError do |e|
+      #   error!({code:2, error:'not found'}, 400)
+      # end
 
       # rescue_from NoMethodError do |e|
       #   error!({code:3, error:'system error'}, 422)
@@ -86,7 +86,7 @@ module API
         end
 
         params do
-          use :id_valiadtor
+          use :id_validator
         end
 
         # /api/blogs/2
