@@ -1,6 +1,14 @@
 module API
   class Blogs < Grape::API
+    # except xml binary
+    content_type :json, 'application/json'
+    # content_type :xml, 'application/xml'
+    content_type :txt, 'text/plain'
+    # content_type :binary, 'application/octet-stream'
+
     default_format :json
+
+    #version 'v1', using: :path # api/v1/...
 
     helpers do
       def build_response(code: 0, data: nil)
@@ -9,6 +17,53 @@ module API
 
       params :id_valiadtor do |options|
         requires :id, type: Integer
+      end
+    end
+
+    rescue_from ActiveRecord::RecordNotFound, NoMethodError do |e|
+      error!({code:2, error:'not found'}, 400)
+    end
+
+    # rescue_from NoMethodError do |e|
+    #   error!({code:3, error:'system error'}, 422)
+    # end
+
+    # rescue_from :all
+
+    # http_basic do |username, password|
+    #   username == 't' and password == 'h'
+    # end
+
+    # filter order before before_validation after_validation after
+    before do
+      unless request.headers['X-Api-Secret-Key'] == 'key'
+        #error! 'forbidden', 403
+        error!({code:1, message:'forbidden'}, 403)
+      end
+      #@current_user = nil
+    end
+
+    after do
+
+    end
+
+    before_validation do
+
+    end
+
+    after_validation do
+
+    end
+
+    version 'v1', using: :path do
+      get '/test/f' do
+        raise NoMethodError
+      end
+    end
+
+    version 'v2', using: :path do
+      get '/test/f' do
+        'test f v2'
       end
     end
 
@@ -80,7 +135,8 @@ module API
         build_response data: "hot #{params[:id]}"
       end
 
-      get 'lasest' do
+      # ignore swagger init (hidden: true)
+      get 'lasest', hidden: true do
         redirect '/api/blogs/popular' # 返回给浏览器 301 302 调整码
       end
 
