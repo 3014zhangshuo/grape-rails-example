@@ -5,3 +5,10 @@
 - 状态码：status code
 - 文档：documentation
 - 流量控制：access flow control
+
+## CORS（跨域）
+- 协议：http https
+- 端口
+- 域名
+
+指定端口号 `rails s -p 6001`
