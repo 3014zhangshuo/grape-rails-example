@@ -2,26 +2,7 @@ module API
   module V1
     class Blogs < Grape::API
       include Default
-      # except xml binary
-      # content_type :json, 'application/json'
-      # # content_type :xml, 'application/xml'
-      # content_type :txt, 'text/plain'
-      # # content_type :binary, 'application/octet-stream'
-      #
-      # default_format :json
-      #
-      # #version 'v1', using: :path # api/v1/...
-      #
-      # helpers do
-      #   def build_response(code: 0, data: nil)
-      #     { code: code, data: data }
-      #   end
-      #
-      #   params :id_valiadtor do |options|
-      #     requires :id, type: Integer
-      #   end
-      # end
-      #
+  
       # rescue_from ActiveRecord::RecordNotFound, NoMethodError do |e|
       #   error!({code:2, error:'not found'}, 400)
       # end
@@ -42,36 +23,31 @@ module API
           #error! 'forbidden', 403
           error!({code:1, message:'forbidden'}, 403)
         end
-        #@current_user = nil
       end
 
       after do
-
       end
 
       before_validation do
-
       end
 
       after_validation do
-
       end
 
-      version 'v1', using: :path do
-        get '/test/f' do
-          raise NoMethodError
-        end
-      end
-
-      version 'v2', using: :path do
-        get '/test/f' do
-          'test f v2'
-        end
-      end
+      # version 'v1', using: :path do
+      #   get '/test/f' do
+      #     raise NoMethodError
+      #   end
+      # end
+      #
+      # version 'v2', using: :path do
+      #   get '/test/f' do
+      #     'test f v2'
+      #   end
+      # end
 
       # alias namespace resource group segment
       resources :blogs do
-
         # /blogs/3/comments
         route_param :id do
           resources :comments do
@@ -147,15 +123,6 @@ module API
           build_response data: 'popular'
         end
       end
-
-      add_swagger_documentation(
-        info: {
-          title: '',
-          contact_email: ''
-        },
-        mount_path: 'doc/swagger',
-        doc_version: ''
-      )
     end
   end
 end

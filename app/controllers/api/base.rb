@@ -4,11 +4,11 @@ module API
 
     add_swagger_documentation(
       info: {
-        title: '',
-        contact_email: ''
+        title: 'Swagger Eample',
+        contact_email: '3014zhangshuo@gmail.com'
       },
       mount_path: 'doc/swagger',
-      doc_version: ''
+      doc_version: '1.0'
     )
   end
 end

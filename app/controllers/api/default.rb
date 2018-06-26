@@ -4,13 +4,14 @@ module API
 
     included do
       include Helpers::Common
-      version 'v1', using: :path
+      version 'v1', using: :path # api/v1/...
 
       # except xml binary
-      content_type :json, 'application/json'
       # content_type :xml, 'application/xml'
+      # content_type :binary, 'application/octet-stream'
+      content_type :json, 'application/json'
       content_type :txt, 'text/plain'
-      # content_ty  pe :binary, 'application/octet-stream'
+
       default_format :json
 
       rescue_from ActiveRecord::RecordNotFound, NoMethodError do |e|
